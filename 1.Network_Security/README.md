@@ -173,7 +173,7 @@ pfSense | 1 gb | [pfsense download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24ce
 The repository for terraform deploymnet can be cloned using the link below
 
 ```shell
-git clone https://github.com/lsuutari19/network_sec_platform
+git clone https://github.com/ouspg/network_sec_platform.git
 ```
 There are three images that you need to download (links provided above) and place them into directory _network_sec_platform/images_ 
 
@@ -251,7 +251,7 @@ terraform apply
   virsh net-autostart internal_network && virsh net-autostart external_network && virsh net-autostart demilitarized_zone
 ```
 
-- Running into errors? Read the troubleshoot section [here](https://github.com/lsuutari19/network_sec_platform?tab=readme-ov-file#troubleshooting)
+- Running into errors? Read the troubleshoot section [here](https://github.com/ouspg/network_sec_platform/tree/main?tab=readme-ov-file#troubleshooting)
 
 - Virsh [commands](https://download.libvirt.org/virshcmdref/html-single/) are useful for troubleshooting as well, particularly the net-, pool- & volume (list, destroy, undefine)
 
@@ -268,7 +268,7 @@ Following this, you'll use virtual manager to access the virtual resources spawn
 Clone the main branch if you haven't already and place virtual images in network_sec_platform/images folder. Skip this step if you've done already.
 
 ```shell
-git clone https://github.com/lsuutari19/network_sec_platform
+git clone https://github.com/ouspg/network_sec_platform.git
 ```
 
 Useful commands:

@@ -136,7 +136,7 @@ For simplicity, follow the three steps guide below:
 **1) Fetch the new_network setup branch**
 
 
-You can fetch the lab2 branch from the https://github.com/lsuutari19/network_sec_platform repository and checkout to it.
+You can fetch the lab2 branch from the https://github.com/ouspg/network_sec_platform.git repository and checkout to it.
 ```
 git fetch origin lab2
 git checkout lab2
@@ -144,7 +144,7 @@ git checkout lab2
 
 Or you can clone the lab2 branch repository from scratch using
 ```
-git clone -b lab2 https://github.com/lsuutari19/network_sec_platform
+git clone -b lab2 https://github.com/ouspg/network_sec_platform.git
 ```
 
 **2) Download and place relevant images into _network_sec_platform/images_ folder**

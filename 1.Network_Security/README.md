@@ -15,7 +15,7 @@ Tips for option 3:
 ## Preliminary tasks & prerequisites
 
 * Create a GitHub account if you don't already have one
-* Create your answer repository from the [provided link](https://classroom.github.com/a/89oK6jY_), **as instructed [here](https://github.com/ouspg/CloudAndNetworkSecurity/blob/main/README.md#getting-started)**
+* Create your answer repository from the [provided link](https://moodle.oulu.fi/course/view.php?id=18795) on moodle, **as instructed [here](https://github.com/ouspg/CloudAndNetworkSecurity/blob/main/README.md#getting-started)**
 * This exercise can be completed on a linux system or a windows linux sub-system
 * You can also use the course's Arch Linux virtual machine
     * Instructions are available [here](https://ouspg.org/resources/laboratories/). You will find the download link from the Moodle workspace.
@@ -152,6 +152,12 @@ terraform --version
 ```
 sudo apt-get install virt-install virt-viewer
 sudo apt-get install virt-manager
+
+#if installing on a WSL (windows subsystem for linux) use this single command:
+sudo apt install virtinst virt-viewer
+
+#verify installation with
+virt-manager
 ```
 
 **Install qemu and verify the installation**
@@ -196,6 +202,8 @@ sudo apt-get install xsltproc
 ```
 
 **Initialize default volume storage pool**
+
+cd into the cloned directory _network_sec_platform_ and initialize the default volume storage pool.
 
 Defining this pool to point to ./volumes makes it easier for us to control the resources, also it avoids having to deal with any permission issues. Also keeping all of the resources under "master" directory lets us easily delete all the resources once we are done with the laboratories.
 

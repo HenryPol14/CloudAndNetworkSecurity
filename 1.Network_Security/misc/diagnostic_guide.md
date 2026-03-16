@@ -1,12 +1,37 @@
-Virsh command is important to play with Virtual manager resources. Always use it with root privilages.
+Libvirt acts as the control center that handles all the virtual machines and networks spawned. It is operated by the ```virsh``` command. Whereas, QEMU is the underlying virtualization engine used in this lab setup.
+Thus, ```virsh``` command is important to play with the Virtual manager resources. Always use it with root privilages.
 
 When deleting volumes, use correct path relevant to your volumes.
 
-### LISTING RESOURCES ####
+### INSPECTING POOLS ###
 
 ```
 #To list the default resource pool
 sudo virsh pool-list
+
+#To list all existing pools
+sudo virsh pool-list --all    #this gives you the pool names
+
+#To inspect existing pools and their path
+sudo virsh pool-dumpxml default_pool    #notice default_pool is the pool name. It can be any other pool as well
+```
+
+### DESTROYING POOLS ###
+```
+#In-case you messed up your setup and want to do a fresh start, destroying pools can come in handy. It is a two-step process.
+
+#Step 1: To remove a pool in lbvirt you need to destroy it first
+sudo virsh pool-destroy default_pool
+
+#Step 2: You need to undefine it as well
+sudo virsh pool-undefine default_pool
+
+#This removes the pool completely
+```
+
+### LISTING RESOURCES ####
+
+```
 
 #To list all domains
 sudo virsh list --all
@@ -16,6 +41,9 @@ sudo virsh vol-list --pool <pool-name>
 
 #To list the networks
 sudo virsh net-list
+
+#To list all the networks deployed by libvirt
+sudo virsh net-list --all
 ```
 ### DELETING RESOURCE INSTANCES
 

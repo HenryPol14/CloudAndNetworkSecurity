@@ -2,7 +2,6 @@
 
 This installation instruction is designed for arch linux operating system.
 
-VM Passwords
 
 ## Install and setup libvirtd and necessary packages for UEFI virtualization
 ```
@@ -83,6 +82,9 @@ sudo pacman -S libxslt
 ```
 
 ### Initialize default storage pool if it hasn't been created by libvirt
+
+cd into the cloned directory network_sec_platform and initialize the default volume storage pool.
+
 Defining this pool to point to ./volumes makes it easier for us to control the resources, also it avoids having to deal with any permission issues. Also keeping all of the resources under "master" directory lets us easily delete all the resources once we are done with the laboratories.
 
 ```

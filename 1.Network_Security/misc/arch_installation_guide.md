@@ -58,7 +58,7 @@ qemu-system-x86_64 --version
 The repository for terraform deployment can be cloned using provided link
 
 ```shell
-git clone https://github.com/lsuutari19/network_sec_platform.git
+git clone https://github.com/ouspg/network_sec_platform.git
 ```
 There are four images that you need to download and place them into directory network_sec_platform/images_ 
 

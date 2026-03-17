@@ -8,8 +8,8 @@ This installation instruction is designed for arch linux operating system.
 # Update package databases
 sudo pacman -Syu
 
-# Install necessary packages
-sudo pacman -S qemu-full libvirt ebtables dnsmasq bridge-utils openbsd-netcat
+# Install necessary packages (excluded bridge-utils as it is no longer needed in current arch)
+sudo pacman -S qemu-full libvirt ebtables dnsmasq openbsd-netcat
 
 
 # Add the current user to the libvirt group

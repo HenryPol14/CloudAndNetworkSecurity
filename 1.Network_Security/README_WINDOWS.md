@@ -23,16 +23,24 @@ cd C:\Users\HenryN\projects\CloudAndNetworkSecurity\1.Network_Security
 .\install_virtualbox.ps1
 ```
 
+> [!NOTE]
+> Скрипт автоматически проверяет и отключает конфликтующие компоненты Windows (Hyper-V, WSL2, Sandbox, Credential Guard). Требуется перезагрузка.
+
 #### 2. Настройка сетей
 
+Для автоматической настройки сетей запустите:
 ```powershell
 .\setup_network_virtualbox.ps1
 ```
 
+ИЛИ настройте вручную в VirtualBox:
+- **vboxnet0** (LAN): 10.0.0.1/24
+- **vboxnet1** (DMZ): 10.3.1.1/24
+
 #### 3. Загрузка образов ВМ
 
 Скачайте образы по инструкции в README.md:
-- **Kali Linux** (14.6 GB)
+- **Kali Linux** (14.6 GB) или **Xubuntu** (4.7 GB) для слабых систем
 - **Ubuntu Server** (1.8 GB)
 - **pfSense** (1 GB)
 
@@ -51,6 +59,10 @@ cd C:\Users\HenryN\projects\CloudAndNetworkSecurity\1.Network_Security
 | CPU | 4 ядра | 8 ядер |
 | RAM | 8 GB | 16 GB |
 | Disk | 50 GB | 100 GB SSD |
+| VT-x/AMD-V | Включен в BIOS | — |
+
+> [!NOTE]
+> Дляработы VirtualBox требуется включенный VT-x/AMD-V в настройках BIOS/UEFI.
 
 ---
 
@@ -104,7 +116,11 @@ terraform apply
 **Альтернативы:**
 - **VirtualBox + Terraform** — бесплатный, поддерживает IaC
 - **VMware Workstation** — ручная настройка
-- **WSL2 + libvirt** — нативная поддержка
+- **WSL2 + Ubuntu** — для нативной поддержки libvirt (требует отключения Hyper-V)
+
+**Скрипты для автоматической установки:**
+- `install_virtualbox.ps1` — установка VirtualBox, Terraform, проверка конфликтов
+- `setup_network_virtualbox.ps1` — настройка хост-только сетей
 
 ---
 
@@ -124,3 +140,9 @@ terraform apply
 ---
 
 **Последнее обновление:** 2026-06-16
+
+**Ссылки для скачивания образов:**
+- [Kali Linux](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
+- [Xubuntu (lightweight)](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz)
+- [Ubuntu Server](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
+- [pfSense](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)

@@ -31,9 +31,10 @@ Tips for option 3:
 ** alternatives:**
 * **WSL2 + Ubuntu** — Best compatibility with original instructions
 * **VMware Workstation** — Manual VM setup (no Terraform support)
+* **Lightweight Xubuntu** — 4.7 GB alternative for low-spec systems (see [lightweightVM_instead_of_kali.md](misc/lightweightVM_instead_of_kali.md))
 
 > [!NOTE]
-> This lab requires at least 8 GB RAM. For older machines, consider working in a group or using lightweight alternatives.
+> This lab requires at least 8 GB RAM. For older machines, consider using lightweight Xubuntu image or working in a group.
 
 
 A basic understanding of networking is required. GitHub is required to complete this exercise
@@ -134,6 +135,8 @@ The network structure in this lab is built upon terraform. Terraform is a tool f
 
 **NOTE:** If you plan to set up the network within a virtual machine, be mindful of the hard disk space requirements, as the image sizes are large.
 
+For **low-spec systems** (8GB RAM or less), use the lightweight **Xubuntu image** instead of Kali (14.6 GB → 4.7 GB). See: [lightweightVM_instead_of_kali.md](misc/lightweightVM_instead_of_kali.md)
+
 
 **Install and set up libvirtd and necessary packages for UEFI virtualization:**
 ```
@@ -186,9 +189,10 @@ Following table summarizes the required images with download links for this lab:
 
 Image name|Image size|Download Link
 :-:|:-:|:-:
-Kali Linux | 14.6 GB | [kali download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
-Ubuntu Server | 1.8 GB | [server download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
-pfSense | 1 GB | [pfSense download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
+**Kali Linux** | 14.6 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
+**Xubuntu (lightweight)** | 4.7 GB | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) *(for low-spec systems)*
+**Ubuntu Server** | 1.8 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
+**pfSense** | 1 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
 
 The repository for terraform deployment can be cloned using the link below
 

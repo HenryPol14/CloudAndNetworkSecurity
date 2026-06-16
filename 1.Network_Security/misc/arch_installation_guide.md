@@ -53,21 +53,23 @@ https://www.qemu.org/download/#linux
 sudo pacman -S qemu
 qemu-system-x86_64 --version
 ```
-### Download the relevant images & place them in the directory network_sec_platform/images_
+### Download the relevant images & place them in the directory network_sec_platform/images
 
 The repository for terraform deployment can be cloned using provided link
 
 ```shell
 git clone https://github.com/ouspg/network_sec_platform.git
 ```
-There are four images that you need to download and place them into directory network_sec_platform/images_ 
+
+There are four images that you need to download and place them into directory network_sec_platform/images
 
 They have following names:
 Image name|Image size|Download Link
 :-:|:-:|:-:
-Kali linux | 14.6 gb | [kali download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
-Ubuntu server | 1.8 gb | [server download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
-pfSense | 1 gb | [pfsense download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
+**Kali linux** | 14.6 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
+**Xubuntu (lightweight)** | 4.7 gb | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) *(for low-spec systems)*
+**Ubuntu server** | 1.8 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
+**pfSense** | 1 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
 
 ### Install mkisofs
 ```
@@ -101,7 +103,7 @@ sudo virsh pool-start default_pool
 sudo virsh pool-autostart default_pool
 ```
 
-### Configure user permisions for libvirt + qemu to storage pool
+### Configure user permissions for libvirt + qemu to storage pool
 
 ```
 sudo chown -R $(whoami):libvirt $PWD/volumes

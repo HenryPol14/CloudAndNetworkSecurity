@@ -1,4 +1,4 @@
-Cloud and Network Security Lab 7 Security of Internet: The Big Picture
+Cloud and Network Security Lab 7 Security of Internet The Big Picture
 ====
 
 Responsible person/main contact: Asad Hasan, Juuso Herajärvi

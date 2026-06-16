@@ -189,10 +189,10 @@ Following table summarizes the required images with download links for this lab:
 
 Image name|Image size|Download Link
 :-:|:-:|:-:
-**Kali Linux** | 14.6 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
+**Kali Linux 2026.1** | ~5 GB | [Download](https://cdimage.kali.org/kali-2026.1/kali-linux-2026.1-qemu-amd64.7z)
 **Xubuntu (lightweight)** | 4.7 GB | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) *(for low-spec systems)*
-**Ubuntu Server** | 1.8 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
-**pfSense** | 1 GB | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
+**Ubuntu Server 26.04 LTS** | 5.9 GB | [Download](https://ubuntu.com/download/server/thank-you?version=26.04&architecture=amd64&lts=true)
+**pfSense 2.8.1** | ~1.2 GB | [Download](https://download.pfsense.org/releases/2.8.1/pfSense-CE-2.8.1-RELEASE-amd64.iso.gz)
 
 The repository for terraform deployment can be cloned using the link below
 

@@ -45,6 +45,7 @@ Total Points|Total Grade
 
 ## Getting started
 
+- **[README_RU.md](1.Network_Security/README_RU.md)** — Русская версия документации
 - Enroll in the course
 - Find the course's Moodle page from the University's Moodle
 - Find a link where you can receive and create a private repository containing all the return template folders. 

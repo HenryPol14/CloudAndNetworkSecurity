@@ -7,9 +7,9 @@ Download the custom created lightweight Xubuntu VM from [here](https://a3s.fi/sw
 
 Image name|Image size|Download Link
 :-:|:-:|:-:
-**Xubuntu linux** | 4.7 gb | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz)
-**Ubuntu server** | 1.8 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
-**pfSense** | 1 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)
+**Xubuntu linux (lightweight)** | 4.7 gb | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz)
+**Ubuntu server** | 5.9 gb | [Download](https://ubuntu.com/download/server/thank-you?version=26.04&architecture=amd64&lts=true)
+**pfSense** | 1 gb | [Download](https://www.pfsense.org/download/?file=pfsense-2.7.2-release-amd64.iso)
 
 Extract the file with `tar -xvzf Xubuntu.qcow2.tar.gz `
 
@@ -28,8 +28,8 @@ Login credentials for VMs in following format: username:password
 
 Image|Username:Password
 :-:|:-:|
-Xubuntu linux | osboxes:xubuntu
+Xubuntu linux (4.7 GB) | osboxes:xubuntu
 Ubuntu server | ubuntu:linux
-**pfSense** | admin:pfsense (веб-интерфейс)
+pfSense | admin:pfsense (веб-интерфейс)
 
 You are all set to deploy the network with terraform now using this lightweight image. It has the required tools installed for lab 1!

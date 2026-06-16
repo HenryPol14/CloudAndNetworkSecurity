@@ -123,12 +123,12 @@ sudo apt-get install virt-manager virt-install virt-viewer
 
 | Образ | Размер | Ссылка загрузки |
 |-------|--------|-----------------|
-| **Kali Linux** | 14.6 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip) |
+| **Kali Linux 2026.1** | ~5 ГБ | [Download](https://cdimage.kali.org/kali-2026.1/kali-linux-2026.1-qemu-amd64.7z) |
 | **Xubuntu (легковесная)** | 4.7 ГБ | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) *для слабых систем* |
-| **Ubuntu Server** | 1.8 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2) |
-| **pfSense** | 1 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2) |
+| **Ubuntu Server 26.04 LTS** | 5.9 ГБ | [Download](https://ubuntu.com/download/server/thank-you?version=26.04&architecture=amd64&lts=true) |
+| **pfSense 2.8.1** | ~1.2 ГБ | [Download](https://download.pfsense.org/releases/2.8.1/pfSense-CE-2.8.1-RELEASE-amd64.iso.gz) *(если недоступно, загрузите с [официального сайта](https://www.pfsense.org/download))*
 
-Репозиторий Terraform:
+Raspberry Pi images available at: https://www.kali.org/docs/arm/
 ```bash
 git clone https://github.com/ouspg/network_sec_platform.git
 ```
@@ -270,10 +270,10 @@ tshark -r hacker_data.pcap -T fields -e data.data > hexdump.txt
 
 | Образ | Размер | Ссылка |
 |-------|--------|--------|
-| Kali Linux | 14.6 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip) |
-| Xubuntu (легковесная) | 4.7 ГБ | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) |
-| Ubuntu Server | 1.8 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2) |
-| pfSense | 1 ГБ | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2) |
+| **Kali Linux 2026.1** | ~5 ГБ | [Download](https://cdimage.kali.org/kali-2026.1/kali-linux-2026.1-qemu-amd64.7z) |
+| **Xubuntu (легковесная)** | 4.7 ГБ | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) |
+| **Ubuntu Server 26.04 LTS** | 5.9 ГБ | [Download](https://ubuntu.com/download/server/thank-you?version=26.04&architecture=amd64&lts=true) |
+| **pfSense 2.8.1** | ~1.2 ГБ | [Download](https://download.pfsense.org/releases/2.8.1/pfSense-CE-2.8.1-RELEASE-amd64.iso.gz) |
 
 ---
 

@@ -66,7 +66,7 @@ There are four images that you need to download and place them into directory ne
 They have following names:
 Image name|Image size|Download Link
 :-:|:-:|:-:
-**Kali linux** | 14.6 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/kali-linux-2023.4-qemu-amd64.zip)
+**Kali linux 2026.1** | ~12 GB (压缩后 ~5 GB) | [Download](https://cdimage.kali.org/kali-2026.1/kali-linux-2026.1-qemu-amd64.7z)
 **Xubuntu (lightweight)** | 4.7 gb | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz) *(for low-spec systems)*
 **Ubuntu server** | 1.8 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/ubuntu_server.qcow2)
 **pfSense** | 1 gb | [Download](https://a3s.fi/swift/v1/AUTH_d797295bcbc24cec98686c41a8e16ef5/CloudAndNetworkSecurity/router_pfsense.qcow2)

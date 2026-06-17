@@ -4,3 +4,6 @@ dev
 *.pem
 *.csr
 __pycache__/
+
+# Exclude network_sec_platform images from sync
+network_sec_platform/images/

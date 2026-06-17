@@ -54,3 +54,43 @@ You are expected to answer for given templates and store your actual work in thi
 - Complete as many tasks as you wish and update your repository accordingly. 
 Check the grading table found in each lab instructions on what you have to complete to earn the grade of your choosing
 - Push your changes to your repository before the deadline, and return the link to your repository to the corresponding return box of the lab in Moodle.
+
+## Development
+
+### Validation Scripts
+
+Код включает скрипты валидации, взятые из проекта [llm-lab](https://gitlab.com/henrynik/llm-lab):
+
+| Скрипт | Описание |
+|--------|----------|
+| `.kilo/scripts/validate-bash.sh` | Проверка синтаксиса Bash скриптов (с ShellCheck) |
+| `.kilo/scripts/validate-yaml.sh` | Валидация YAML конфигураций |
+| `.kilo/scripts/validate-markdown.sh` | Базовая проверка Markdown документов |
+| `.kilo/scripts/validate-all.sh` | Запуск всех проверок |
+
+**Установка зависимостей:**
+```bash
+# PyYAML для валидации YAML
+pip install pyyaml
+
+# ShellCheck для статического анализа Bash (опционально)
+# Установка через Chocolatey:
+choco install shellcheck
+```
+
+**Запуск:**
+```bash
+# Все проверки
+bash .kilo/scripts/validate-all.sh
+
+# Отдельные проверки
+bash .kilo/scripts/validate-bash.sh
+python .kilo/scripts/validate-yaml.sh
+python .kilo/scripts/validate-markdown.sh
+```
+
+**Использованные правила из llm-lab:**
+- `set -Eeuo pipefail` в Bash скриптах
+- ShellCheck-совместимый стиль
+- `readonly` константы и `local` переменные
+- snake_case именование

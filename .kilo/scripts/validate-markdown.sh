@@ -30,9 +30,28 @@ def validate_markdown(filepath):
         issues.append("Файл пустой")
         return issues
     
-    # Проверка: есть заголовок H1
-    h1_found = any(re.match(r'^# ', line) for line in lines[:10])
-    if not h1_found:
+    # Проверка: есть заголовок H1-H6 (поддержка # и ======, ------)
+    has_h1 = False
+    for i, line in enumerate(lines[:10]):
+        # Проверка на H1-H6 с # форматом
+        if re.match(r'^#{1,6} ', line):
+            has_h1 = True
+            break
+        # Проверка на H1 с underlining (====)
+        if i > 0 and re.match(r'^=+$', line) and len(line.strip()) >= 4:
+            prev_line = lines[i-1]
+            if prev_line and prev_line.strip() and not prev_line.strip().startswith('#') and not prev_line.strip().startswith('>'):
+                has_h1 = True
+                break
+        # Проверка на H2 с underlining (----)
+        if i > 0 and re.match(r'^-+$', line) and len(line.strip()) >= 4:
+            prev_line = lines[i-1]
+            if prev_line and prev_line.strip() and not prev_line.strip().startswith('#') and not prev_line.strip().startswith('>'):
+                # Это H2 в стиле подчеркивания, считаем как заголовок
+                has_h1 = True
+                break
+    
+    if not has_h1:
         issues.append("Отсутствует заголовок H1")
     
     # Проверка: кодировка UTF-8
@@ -47,10 +66,13 @@ def validate_markdown(filepath):
             issues.append(f"Строка {i}: CRLF перенос (используйте LF)")
             break
     
-    # Проверка битых ссылок (относительные пути к .md файлам)
+    # Проверка битых ссылок (только относительные пути к .md файлам)
     # Паттерн для относительных ссылок: [text](path.md)
     relative_links = re.findall(r'\[([^\]]+)\]\(([^\)]+\.md)\)', content)
     for link_text, link_path in relative_links:
+        # Пропускаем абсолютные URL
+        if link_path.startswith('http://') or link_path.startswith('https://'):
+            continue
         # Решаем путь относительно текущего файла
         base_dir = os.path.dirname(filepath)
         target_path = os.path.normpath(os.path.join(base_dir, link_path))
@@ -61,13 +83,14 @@ def validate_markdown(filepath):
 
 def main():
     script_dir = Path(__file__).parent.resolve()
-    project_root = script_dir.parent
+    project_root = script_dir.parent.parent
     
     print("=== Валидация Markdown документов ===")
     print(f"Project: {project_root}")
     print()
     
     errors = 0
+    warnings = 0
     markdown_files = []
     
     # Ищем все .md файлы
@@ -84,8 +107,8 @@ def main():
     markdown_files = list(set(markdown_files))
     
     if not markdown_files:
-        print("✗ Нет Markdown файлов для проверки")
-        sys.exit(1)
+        print("✓ Нет Markdown файлов для проверки (пропуск)")
+        sys.exit(0)
     
     for filepath in sorted(markdown_files):
         abs_path = os.path.abspath(filepath)

@@ -1,3 +1,5 @@
+# Lightweight VM for Network Security Labs
+
 Use this guide if you have a low spec system and want to do lab 1 and 2.
 
 This tutorial guides you to replace the kali linux image (14.6GB) with a lightweight Xubuntu image (4.7GB). Rest of the installation steps stay the same as in the manual.

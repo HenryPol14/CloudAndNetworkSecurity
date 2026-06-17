@@ -7,3 +7,5 @@ __pycache__/
 
 # Exclude network_sec_platform images from sync
 network_sec_platform/images/
+kali-wsl.7z
+wsl_setup_output.log

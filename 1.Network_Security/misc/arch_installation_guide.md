@@ -2,7 +2,6 @@
 
 This installation instruction is designed for arch linux operating system.
 
-
 ## Install and setup libvirtd and necessary packages for UEFI virtualization
 ```
 # Update package databases
@@ -10,7 +9,6 @@ sudo pacman -Syu
 
 # Install necessary packages (excluded bridge-utils as it is no longer needed in current arch)
 sudo pacman -S qemu-full libvirt ebtables dnsmasq openbsd-netcat
-
 
 # Add the current user to the libvirt group
 sudo gpasswd -a $(whoami) libvirt
@@ -38,7 +36,6 @@ sudo pacman -S terraform
 which terraform
 terraform --version
 ```
-
 
 ### install virt-manager for VM accessibility
 ```
@@ -77,7 +74,7 @@ Image name|Image size|Download Link
 sudo pacman -S cdrtools
 ```
 
-### Install xsltproc 
+### Install xsltproc
 ```
 # Install xsltproc
 sudo pacman -S libxslt
@@ -123,10 +120,8 @@ group = "libvirt"
 ...
 security_driver = "none"
 ```
-```
 sudo systemctl restart libvirtd
 ```
-
 
 ### Provision the platform with Terraform
 ```
@@ -136,7 +131,6 @@ terraform apply
 
 Note: the ubuntu-domain takes a minute to start due to the nature of the cloud images and their preconfigurations.
 ```
-
 
 **Notes:**
 - The ubuntu-domain takes a minute to start due to the nature of the cloud images and their preconfigurations.

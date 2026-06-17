@@ -6,9 +6,9 @@
 
 | Инструмент | Статус | Установка |
 |------------|--------|-----------|
-| **PSScriptAnalyzer** | ✅ Установлен | PowerShell Gallery |
-| **PyYAML** | ✅ Установлен | pip |
-| **ShellCheck** | ❌ Не установлен |Chocolatey (недоступен из-за сетевых проблем) |
+| **PSScriptAnalyzer** | ✅ Установлен | `PowerShell Gallery` |
+| **PyYAML** | ✅ Установлен | `pip` |
+| **ShellCheck** | ❌ Не установлен | `Chocolatey` (недоступен из-за сетевых проблем) |
 
 ### Созданные скрипты
 
@@ -33,13 +33,13 @@ Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
 ```
 
-### 2. Установка PyYAML (используется Python 3.14)
+### 2. Установка PyYAML (используется `Python 3.14`)
 
 ```bash
 C:\Python314\python.exe -m pip install pyyaml
 ```
 
-### 2. Установка PyYAML (используется Python 3.14)
+### 2. Установка PyYAML (используется `Python 3.14`)
 
 ```bash
 C:\Python314\python.exe -m pip install pyyaml

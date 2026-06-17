@@ -6,7 +6,6 @@ This tutorial guides you to replace the kali linux image (14.6GB) with a lightwe
 
 Download the custom created lightweight Xubuntu VM from [here](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz)
 
-
 Image name|Image size|Download Link
 :-:|:-:|:-:
 **Xubuntu linux (lightweight)** | 4.7 gb | [Download](https://a3s.fi/swift/v1/CloudAndNetworkSecurity/Xubuntu.qcow2.tar.gz)
@@ -20,8 +19,6 @@ Clone the repository if you haven't already:
 git clone https://github.com/ouspg/network_sec_platform.git
 ```
 
-
-
 Download all the relevant images & place them in the directory network_sec_platform/images
 
 Rename the `Xubuntu.qcow2` to `kali-linux-2023.4-qemu-amd64.qcow2`
@@ -34,4 +31,4 @@ Xubuntu linux (4.7 GB) | osboxes:xubuntu
 Ubuntu server | ubuntu:linux
 pfSense | admin:pfsense (веб-интерфейс)
 
-You are all set to deploy the network with terraform now using this lightweight image. It has the required tools installed for lab 1!
+You are all set to deploy the network with `terraform` now using this lightweight image. It has the required tools installed for lab 1!

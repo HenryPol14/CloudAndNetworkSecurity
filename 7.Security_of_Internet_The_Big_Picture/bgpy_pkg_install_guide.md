@@ -1,8 +1,8 @@
 ## BGPY Installation
 
-1) Install pypy on kali linux from [official website](https://www.pypy.org/download.html)
+1) Install `pypy` on kali linux from [official website](https://www.pypy.org/download.html)
 
-2) Extract the package and rename the folder from pypy3.10-v7.x.xx-linux64 to pypy. Move to folder /opt/pypy
+2) Extract the package and rename the folder from `pypy3.10-v7.x.xx-linux64` to `pypy`. Move to folder `/opt/pypy`
 ```
 mv pypy-<version>-<architecture> /opt/pypy
 ```

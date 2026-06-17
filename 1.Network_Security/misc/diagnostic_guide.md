@@ -3,7 +3,7 @@ Thus, `virsh` command is important to play with the Virtual manager resources. A
 
 When deleting volumes, use correct path relevant to your volumes.
 
-### INSPECTING POOLS ###
+### INSPECTING POOLS
 
 ```
 #To list the default resource pool
@@ -16,7 +16,7 @@ sudo virsh pool-list --all
 sudo virsh pool-dumpxml default_pool    #notice default_pool is the pool name. It can be any other pool as well
 ```
 
-### DESTROYING POOLS ###
+### DESTROYING POOLS
 ```
 #In-case you messed up your setup and want to do a fresh start, destroying pools can come in handy. It is a two-step process.
 

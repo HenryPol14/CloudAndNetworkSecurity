@@ -44,7 +44,7 @@
 
 * **hping3** — [Документация](https://www.kali.org/tools/hping3/)
 * **nmap** — [Документация](https://nmap.org/book/man-host-discovery.html)
-* **terraform** — [Учебник](https://k21academy.com/terraform-iac/terraform-beginners-guide/)
+* **`terraform`** — [Учебник](https://k21academy.com/terraform-iac/terraform-beginners-guide/)
 * **ICMP** — [Википедия](https://ru.wikipedia.org/wiki/ICMP)
 * **pfSense** — [Официальная документация](https://docs.netgate.com/pfsense/en/latest/install/assign-interfaces.html)
 * **Wireshark** — [Документация](https://www.wireshark.org/docs/wsug_html/)

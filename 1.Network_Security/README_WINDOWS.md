@@ -16,7 +16,7 @@
 
 #### 1. Установка компонентов
 
-Запустите от имени администратора PowerShell:
+Запустите от имени администратора `PowerShell`:
 
 ```powershell
 cd C:\Users\HenryN\projects\CloudAndNetworkSecurity\1.Network_Security

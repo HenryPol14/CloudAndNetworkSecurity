@@ -2,17 +2,12 @@
 
 ## 1.
 
-Destroy everything and remove terraform tf state files 
-```
-terraform destroy
-rm terraform.tfstate
-rm terraform.tfstate.backup
+Destroy everything and remove terraform tf state files
 ```
 
+## 2.
 
-## 2. 
-
-Power off your virtual arch and go-to network settings and choose Bridged Adapter. Refresh and assign it a new MAC address. Promisciuos mode tick allow all. 
+Power off your virtual arch and go-to network settings and choose Bridged Adapter. Refresh and assign it a new MAC address. Promisciuos mode tick allow all.
 Virtual cable tick connected.
 
 <img width="752" height="334" alt="image" src="https://github.com/user-attachments/assets/65f49359-9077-408d-bfe2-c946e2112ac3" />

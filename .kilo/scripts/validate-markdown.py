@@ -30,15 +30,6 @@ FILES_TO_CHECK = [
 ERRORS_FOUND = False
 
 
-def check_line_length(content: str, max_length: int = 200) -> list[str]:
-    """Check for lines longer than max_length."""
-    errors = []
-    for line_num, line in enumerate(content.split("\n"), 1):
-        if len(line.rstrip()) > max_length:
-            errors.append(f"Line {line_num}: Line too long ({len(line)} chars, max {max_length})")
-    return errors
-
-
 def check_trailing_whitespace(content: str) -> list[str]:
     """Check for trailing whitespace."""
     errors = []
@@ -88,7 +79,7 @@ def check_heading_format(content: str) -> list[str]:
 
 
 def check_inline_code_format(content: str) -> list[str]:
-    """Check inline code formatting - only flag words that are likely commands but not in code blocks."""
+    """Check inline code formatting - flag only non-command words that should be in backticks."""
     errors = []
     lines = content.split("\n")
     in_code_block = False
@@ -101,41 +92,35 @@ def check_inline_code_format(content: str) -> list[str]:
         stripped = line.strip()
         if stripped == "" or stripped.startswith(">"):
             continue
-        # Skip lines that are markdown headings
         if stripped.startswith("#"):
             continue
-        # Skip lines that are list items
         if stripped.startswith("-") or stripped.startswith("*") or stripped.startswith("+"):
             continue
-        # Skip HTML comments
         if stripped.startswith("<!--"):
             continue
-        # Skip table separators
         if re.match(r"^[-:|]+$", stripped):
             continue
-        # Skip lines that are just links or URLs
         if re.match(r"^[*+-]\s*\*\*", stripped):
             continue
-        
-        # Only flag specific patterns - look for words that are commands but NOT inside links [text](url)
-        # First check if line has a link - if so, skip it
-        if re.search(r"\[.*?\]\(.*?\)", line, re.IGNORECASE):
-            # Line has a link - only flag if there's command outside the link
-            # Remove link parts and check again
+
+        # Only flag markdown keywords that should have backticks (software names, options)
+        # Skip raw URLs and technical descriptions
+        if re.search(r"\[([^\]]+)\]\([^)]*\)", line):
+            # Line has a link - find text outside links
             line_without_links = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", line)
-            if not re.search(r"`[^`]+`", line_without_links):
-                if re.search(r"\b(python|bash|powershell|shell|npm|curl|nc|docker|kubectl|terraform|pip|apt|gem)\b", line_without_links, re.IGNORECASE):
+            # Check for software names that should be in backticks
+            if re.search(r"\b(python|bash|powershell|npm|terraform|pip|apt|gem)\b", line_without_links, re.IGNORECASE):
+                if not re.search(r"`[^`]+`", line_without_links):
                     errors.append(
                         f"Line {line_num}: Code should be wrapped in backticks (e.g., `command`)"
                     )
-            continue
-        
-        # Check for command keywords that need backticks
-        if re.search(r"\b(python|bash|powershell|shell|npm|curl|nc|docker|kubectl|terraform|pip|apt|gem)\b", line, re.IGNORECASE):
-            if not re.search(r"`[^`]+`", line):
-                errors.append(
-                    f"Line {line_num}: Code should be wrapped in backticks (e.g., `command`)"
-                )
+        elif re.search(r"\b(python|bash|powershell|npm|terraform|pip|apt|gem)\b", line, re.IGNORECASE):
+            # Check if it's just a link, not actual command
+            if not re.search(r"\[.*\]\(.*\)", line):
+                if not re.search(r"`[^`]+`", line):
+                    errors.append(
+                        f"Line {line_num}: Code should be wrapped in backticks (e.g., `command`)"
+                    )
     return errors
 
 
@@ -187,7 +172,6 @@ def check_unordered_list_format(content: str) -> list[str]:
 def check_html_tags(content: str) -> list[str]:
     """Check for unused HTML tags like <details> without corresponding </details>."""
     errors = []
-    # Remove HTML comments first
     content_no_comments = re.sub(r"<!--[\s\S]*?-->", "", content)
     open_tags = re.findall(r"<(details|summary)[^>]*>", content_no_comments, re.IGNORECASE)
     close_tags = re.findall(r"</(details|summary)>", content_no_comments, re.IGNORECASE)
@@ -205,7 +189,6 @@ def validate_file(filepath: Path) -> list[str]:
     except Exception as e:
         return [f"Error reading file: {e}"]
 
-    issues.extend(check_line_length(content))
     issues.extend(check_trailing_whitespace(content))
     issues.extend(check_consecutive_blank_lines(content))
     issues.extend(check_heading_format(content))

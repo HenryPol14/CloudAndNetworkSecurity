@@ -62,6 +62,22 @@ Write-Header "Environment check"
 
 Test-VBoxManage
 
+# Create VMs folder
+if (-not (Test-Path "$VM_BASE_DIR\vms")) {
+    New-Item -ItemType Directory -Path "$VM_BASE_DIR\vms" | Out-Null
+}
+
+# Create subfolders for VMs
+foreach ($vmName in @('kali', 'ubuntu_server', 'pfSense')) {
+    $vmPath = "$VM_BASE_DIR\vms\$vmName"
+    if (-not (Test-Path $vmPath)) {
+        New-Item -ItemType Directory -Path $vmPath | Out-Null
+    }
+}
+
+# Network interface name (global)
+$interfaceName = $null
+
 # Check images
 Write-Step "Checking VM images..."
 $images = @(
@@ -82,21 +98,50 @@ foreach ($img in $images) {
 # Check vboxnet0 network
 Write-Step "Checking virtual network..."
 $netList = & $VBOX_MGMT list hostonlyifs
-if ($netList -match "vboxnet0") {
-    Write-OK "Network vboxnet0 exists"
+$vboxNetName = $null
+foreach ($line in $netList) {
+    if ($line -match "^Name:\s+(.+)$") {
+        $vboxNetName = $matches[1]
+        break
+    }
+}
+
+if ($vboxNetName -and $netList -match [regex]::Escape($vboxNetName)) {
+    Write-OK "Network $vboxNetName exists"
+    $interfaceName = $vboxNetName
 } else {
-    Write-Step "Creating network vboxnet0..."
-    & $VBOX_MGMT hostonlyif create
-    Start-Sleep -Seconds 2
+    Write-Step "Creating network..."
+    $createOutput = & $VBOX_MGMT hostonlyif create 2>&1
+    Write-Host "$createOutput"
     
-    # Configure IP
-    & $VBOX_MGMT hostonlyif ipconfig vboxnet0 --ip 10.0.0.1 --netmask 255.255.255.0
-    Write-OK "Network vboxnet0 created and configured (10.0.0.1/24)"
+    # Extract interface name from output
+    $interfaceName = $null
+    foreach ($line in $createOutput) {
+        if ($line -match "Interface '(.+)' was successfully created") {
+            $interfaceName = $matches[1]
+            break
+        }
+    }
+    
+    if (-not $interfaceName) {
+        # Try to get existing interface
+        foreach ($line in $netList) {
+            if ($line -match "^Name:\s+(.+)$") {
+                $interfaceName = $matches[1]
+                break
+            }
+        }
+    }
+    
+    if ($interfaceName) {
+        & $VBOX_MGMT hostonlyif ipconfig "$interfaceName" --ip 10.0.0.1 --netmask 255.255.255.0
+        Write-OK "Network $interfaceName created and configured (10.0.0.1/24)"
+    }
 }
 
 # DHCP server for LAN
 Write-Step "Configuring DHCP server..."
-& $VBOX_MGMT dhcpserver modify --ifname vboxnet0 `
+& $VBOX_MGMT dhcpserver modify --ifname "$interfaceName" `
     --ip 10.0.0.1 --netmask 255.255.255.0 `
     --lowerip 10.0.0.11 --upperip 10.0.0.100 --enable
 Write-OK "DHCP configured (10.0.0.11-100)"
@@ -145,8 +190,8 @@ function New-VM-Safe {
     Write-OK "Configured: ${MemoryMB}MB RAM, $CPU CPU"
     
     # Network
-    & $VBOX_MGMT modifyvm "$Name" --nic1 hostonly --hostonlyadapter1 vboxnet0
-    Write-OK "Network configured (Host-only: vboxnet0)"
+    & $VBOX_MGMT modifyvm "$Name" --nic1 hostonly --hostonlyadapter1 "$interfaceName"
+    Write-OK "Network configured (Host-only: $interfaceName)"
     
     # Disk
     if ($UseExistingDisk) {
@@ -159,16 +204,11 @@ function New-VM-Safe {
     } else {
         # Create new disk
         $vdiPath = "$VM_BASE_DIR\vms\$Name\$Name.vdi"
-        & $VBOX_MGMT createmedium --type disk --filename "$vdiPath" --size $DiskSizeGB
+        & $VBOX_MGMT createmedium disk --filename "$vdiPath" --size $DiskSizeGB
         & $VBOX_MGMT storagectl "$Name" --name "SATA Controller" --add sata
         & $VBOX_MGMT storageattach "$Name" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$vdiPath"
         Write-OK "New disk created: ${DiskSizeGB}GB"
     }
-}
-
-# Create VMs folder
-if (-not (Test-Path "$VM_BASE_DIR\vms")) {
-    New-Item -ItemType Directory -Path "$VM_BASE_DIR\vms" | Out-Null
 }
 
 # ── Kali Linux VM ───────────────────────────────────────────────────────────
@@ -179,7 +219,7 @@ $KaliVdi = "$VM_BASE_DIR\vms\kali\kali.vdi"
 
 if (-not (Test-Path $KaliVdi)) {
     Write-Step "Converting Kali image (qcow2 → vdi)..."
-    & $VBOX_MGMT convertfromraw $KaliQcow2 $KaliVdi --format VDI
+    & $VBOX_MGMT convertfromraw $KaliQcow2 $KaliVdi --format VDI --variant Standard
     if ($LASTEXITCODE -eq 0) {
         Write-OK "Kali image converted"
     } else {
@@ -219,12 +259,12 @@ if (-not ($vms -like "*""pfSense""*")) {
     Write-OK "pfSense NIC1 configured (NAT - WAN)"
     
     # NIC2: Host-only (LAN)
-    & $VBOX_MGMT modifyvm "pfSense" --nic2 hostonly --hostonlyadapter2 vboxnet0
-    Write-OK "pfSense NIC2 configured (Host-only - LAN)"
+    & $VBOX_MGMT modifyvm "pfSense" --nic2 hostonly --hostonlyadapter2 "$interfaceName"
+    Write-OK "pfSense NIC2 configured (Host-only - $interfaceName)"
     
     # Create disk
     $PfSenseVdi = "$VM_BASE_DIR\vms\pfSense\pfSense.vdi"
-    & $VBOX_MGMT createmedium --type disk --filename $PfSenseVdi --size 8192
+    & $VBOX_MGMT createmedium disk --filename $PfSenseVdi --size 8192
     & $VBOX_MGMT storagectl "pfSense" --name "SATA Controller" --add sata
     & $VBOX_MGMT storageattach "pfSense" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium $PfSenseVdi
     
